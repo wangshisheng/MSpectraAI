@@ -1,4 +1,4 @@
-# visdat <img src="www/MSpectraAI_logo.jpg" align="right" height="200" width="200"/>
+# MSpectraAI: A powerful platform for deciphering proteome profiling of multi-tumour mass spectrometry data using deep learning <img src="www/MSpectraAI_logo.jpg" align="right" height="200" width="200"/>
 
 [![rOpenSci
 Badge](https://badges.ropensci.org/87_status.svg)](https://github.com/ropensci/onboarding/issues/87)[![JOSS
