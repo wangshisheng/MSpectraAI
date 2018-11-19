@@ -47,4 +47,4 @@ library(shiny)
 runApp(".../MSpectraAI")
 ```
 Then you can start your own analysis:
-<img src="figs/homepage.jpg" align="center" height="500" width="800"/>
+<img src="figs/homepage.jpg" align="center" height="450" width="800"/>
