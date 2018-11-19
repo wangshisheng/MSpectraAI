@@ -13,6 +13,7 @@
 - **Install RStudio** (Recommendatory but not necessary). You can download RStudio from here:[https://www.rstudio.com/](https://www.rstudio.com/).
 
 ## Install Packages
+We recommend the R version >= 3.5.0.
 ```r
 #Packages
 needpackages<-c("devtools","shiny","shinyjs","shinyBS","ggplot2","ggjoy","openxlsx","gdata","DT","gtools","ggsci","mzR",
@@ -54,3 +55,41 @@ The usage about this tool can be found here:
 
 ## Graphic Abstract
 <img src="figs/TOC_MSpectraAI.jpg" align="center" height="400" width="800"/>
+
+## Information About the Current R Session
+```r
+> sessionInfo()
+R version 3.5.1 (2018-07-02)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows 7 x64 (build 7601) Service Pack 1
+
+Matrix products: default
+
+locale:
+[1] LC_COLLATE=Chinese (Simplified)_People's Republic of China.936  LC_CTYPE=Chinese (Simplified)_People's Republic of China.936   
+[3] LC_MONETARY=Chinese (Simplified)_People's Republic of China.936 LC_NUMERIC=C                                                   
+[5] LC_TIME=Chinese (Simplified)_People's Republic of China.936    
+
+attached base packages:
+[1] grid      parallel  stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] keras_2.1.6           ROCR_1.0-7            gplots_3.0.1          circlize_0.4.4        ComplexHeatmap_1.18.1
+ [6] glue_1.3.0            viridis_0.5.1         viridisLite_0.3.0     ggthemes_4.0.0        ggrastr_0.1.5        
+[11] data.table_1.11.8     abind_1.4-5           tidyr_0.8.2           plyr_1.8.4            impute_1.53.0        
+[16] mzR_2.13.6            Rcpp_0.12.19          ggsci_2.8             gtools_3.5.0          DT_0.4               
+[21] gdata_2.18.0          openxlsx_4.0.17       ggjoy_0.4.1           ggridges_0.5.0        ggplot2_3.1.0        
+[26] shinyBS_0.61          shinyjs_1.0           shiny_1.2.0          
+
+loaded via a namespace (and not attached):
+ [1] ProtGenerics_1.11.0 bitops_1.0-6        RColorBrewer_1.1-2  tools_3.5.0         R6_2.2.2            KernSmooth_2.23-15 
+ [7] lazyeval_0.2.1      BiocGenerics_0.26.0 colorspace_1.3-2    GetoptLong_0.1.7    withr_2.1.2         tidyselect_0.2.5   
+[13] gridExtra_2.3       compiler_3.5.0      Biobase_2.39.2      Cairo_1.5-9         labeling_0.3        caTools_1.17.1.1   
+[19] scales_1.0.0        tfruns_1.3          stringr_1.3.1       digest_0.6.18       base64enc_0.1-3     pkgconfig_2.0.1    
+[25] htmltools_0.3.6     htmlwidgets_1.3     rlang_0.3.0.1       GlobalOptions_0.1.0 rstudioapi_0.7      shape_1.4.4        
+[31] bindr_0.1.1         jsonlite_1.5        tensorflow_1.8      crosstalk_1.0.0     dplyr_0.7.7         magrittr_1.5       
+[37] Matrix_1.2-14       munsell_0.5.0       reticulate_1.9      stringi_1.1.7       whisker_0.3-2       yaml_2.1.19        
+[43] promises_1.0.1      crayon_1.3.4        lattice_0.20-35     zeallot_0.1.0       pillar_1.2.1        rjson_0.2.19       
+[49] codetools_0.2-15    httpuv_1.4.4.1      gtable_0.2.0        purrr_0.2.4.9000    reshape_0.8.7       assertthat_0.2.0   
+[55] mime_0.5
+```
