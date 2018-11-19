@@ -34,5 +34,10 @@ CheckInstallFunc <- function(x){
 }
 #Start to check and install
 CheckInstallFunc(needpackages)
-
+#R interface to Keras: https://keras.rstudio.com/
+library(keras)
+install_keras()
 ```
+
+## Download and Run locally
+You can download our tool from this github and unzip the file
