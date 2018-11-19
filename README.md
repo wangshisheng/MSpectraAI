@@ -40,4 +40,11 @@ install_keras()
 ```
 
 ## Download and Run locally
-You can download our tool from this github and unzip the file
+You can download our tool from this github and unzip the file, then run:
+```r
+#Find the file path and run
+library(shiny)
+runApp(".../MSpectraAI")
+```
+Then you can start your own analysis:
+<img src="figs/homepage.jpg" align="center" height="600" width="800"/>
