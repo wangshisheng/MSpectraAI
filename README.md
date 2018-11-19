@@ -39,7 +39,7 @@ library(keras)
 install_keras()
 ```
 
-## Download and Run locally
+## Download and Run Locally
 You can download our tool from this github and unzip the file, then run:
 ```r
 #Find the file path and run
@@ -47,4 +47,10 @@ library(shiny)
 runApp(".../MSpectraAI")
 ```
 Then you can start your own analysis:
-<img src="figs/homepage.jpg" align="center" height="450" width="800"/>
+<img src="figs/homepage.jpg" align="center" height="400" width="800"/>
+
+## Detailed Introduction
+The usage about this tool can be found here:
+
+## Graphic Abstract
+<img src="figs/TOC_MSpectraAI.jpg" align="center" height="400" width="800"/>
