@@ -93,3 +93,7 @@ loaded via a namespace (and not attached):
 [49] codetools_0.2-15    httpuv_1.4.4.1      gtable_0.2.0        purrr_0.2.4.9000    reshape_0.8.7       assertthat_0.2.0   
 [55] mime_0.5
 ```
+
+## Contact
+You could push an issue on this github. And optionally, you can also sent me an e-mail if you have any question about this tool.
+Email: wssdandan2009@outlook.com
