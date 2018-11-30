@@ -43,7 +43,7 @@ install_keras()
 ## Download and Run Locally
 You can download our tool from this github and unzip the file, then run:
 ```r
-#Find the file path and run
+#Find the file path and run 
 library(shiny)
 runApp(".../MSpectraAI")
 ```
