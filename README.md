@@ -51,7 +51,7 @@ Then you can start your own analysis:
 <img src="figs/homepage.jpg" align="center" height="400" width="800"/>
 
 ## Detailed Introduction
-The usage about this tool can be found here:
+The usage about this tool can be found here:[https://github.com/wangshisheng/MSpectraAI/blob/master/SupportingNotes.pdf](https://github.com/wangshisheng/MSpectraAI/blob/master/SupportingNotes.pdf).
 
 ## Graphic Abstract
 <img src="figs/TOC_MSpectraAI.jpg" align="center" height="400" width="800"/>
