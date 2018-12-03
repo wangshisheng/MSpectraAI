@@ -96,5 +96,5 @@ loaded via a namespace (and not attached):
 ```
 
 ## Contact
-You could push an issue on this github. And optionally, you can also sent me an e-mail if you have any question about this tool.
+You could push an issue on this github. And optionally, please feel free to sent me an e-mail if you have any question or find a bug about this tool.
 Email: wssdandan2009@outlook.com
