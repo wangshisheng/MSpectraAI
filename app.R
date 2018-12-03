@@ -94,9 +94,11 @@ ui<-renderUI(
           ),
           column(
             6,
-            h3("This is an open source project, please visit our github to get the source code:"),
+            h3("I. This is an open source project, please visit our github to get the source code:"),
             a(href="https://github.com/wangshisheng/MSpectraAI",h4("https://github.com/wangshisheng/MSpectraAI")),
-            h3("We recommend you to run this software locally.")
+            h3("II. We recommend you to run this software locally."),
+            h3("III. The detailed manual can be found here:"),
+            a(href="https://github.com/wangshisheng/MSpectraAI/blob/master/SupportingNotes.pdf",h4("https://github.com/wangshisheng/MSpectraAI/blob/master/SupportingNotes.pdf"))
           )
         )
       ),
