@@ -38,7 +38,7 @@ ui<-renderUI(
       column(5,div(
         HTML(
           "<div style='text-align:right;margin-right:0px'>
-          <a href='#' target=''><img src='MSpectraAI_logo.jpg' width='100px'>
+          <a href='#' target=''><img src='MSpectraAI_logotizuo.jpg' width='100px'>
           </a>
           </div>"
         )
@@ -85,6 +85,7 @@ ui<-renderUI(
           div(style="text-align:center",h1("~~Welcome~~")),
           column(
             6,
+            div(style="text-align:center",h3("Graphic Abstract")),
             div(HTML(
               "<div style='text-align:center;'>
           <a href='https://github.com/wangshisheng/MSpectraAI' target='_black'><img src='MSpectraAI_logo.jpg' height='650px'>
