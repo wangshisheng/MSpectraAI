@@ -509,6 +509,20 @@ ui<-renderUI(
                     plotOutput("roccurveplot")
                   )
                 )
+              ),
+              tabPanel(
+                div(id="f1scorediv","F1 Score"),
+                bsTooltip("f1scorediv","The class labels are same as those in ROC Curve！",
+                          options = list(container = "body")),
+                actionButton("mcsbtn_f1score","Calculate",icon("paper-plane"),
+                             style="color: #fff; background-color: #880000; border-color: #880000"),
+                hidden(
+                  div(
+                    id="mcsbtn_f1scoreid",
+                    downloadButton("f1scoredfdl","Download"),
+                    dataTableOutput("f1scoredf")
+                  )
+                )
               )
             )
           )
@@ -1537,6 +1551,49 @@ server<-shinyServer(function(input, output, session){
           dev.off()
         }
       )
+    }
+  )
+  ##F1 Score
+  f1scoredfout<-reactive({
+    rocdf_oralcmsms<-roccurvepout()$rocdf_oralcmsms
+    F1scoredf1<-vector()
+    for(i in 1:nrow(rocdf_oralcmsms)){
+      if(rocdf_oralcmsms$labels[i]==0){
+        F1scoredf1[i]<-2*(1-rocdf_oralcmsms$prevalue[i])/(1+(1-rocdf_oralcmsms$prevalue[i]))
+      }else{
+        F1scoredf1[i]<-2*rocdf_oralcmsms$prevalue[i]/(1+rocdf_oralcmsms$prevalue[i])
+      }
+    }
+    F1scoredf<-data.frame(Labels=rocdf_oralcmsms$labels,F1Score=F1scoredf1)
+    rownames(F1scoredf)<-rownames(rocdf_oralcmsms)
+    F1scoredf
+  })
+  observeEvent(
+    input$mcsbtn_f1score,{
+      shinyjs::show(id = "mcsbtn_f1scoreid", anim = FALSE)
+      output$f1scoredf<-renderDataTable({
+        f1scoredfoutx<-f1scoredfout()
+        f1scoredfoutx<-round(f1scoredfoutx,4)
+        datatable(f1scoredfoutx, options = list(pageLength = 20)) %>%
+          formatStyle("F1Score",background = styleColorBar(range(f1scoredfoutx), 'lightblue'),
+                      backgroundSize = '98% 88%',backgroundRepeat = 'no-repeat',
+                      backgroundPosition = 'center')
+      })
+      output$f1scoredfdl<-downloadHandler(
+        filename = function(){paste("F1Score_",usertimenum,".csv",sep="")},
+        content = function(file){
+          write.csv(f1scoredfout(),file = file)
+        }
+      )
+
+      #output$f1scoredfdl<-downloadHandler(
+      #  filename = function(){paste("ROC_figure",usertimenum,".pdf",sep="")},
+      #  content = function(file){
+      #    pdf(file,width =f1score_heightx()/100,height = f1score_heightx()/100)
+      #    print(f1scoreplotout())
+      #    dev.off()
+      #  }
+      #)
     }
   )
 })
