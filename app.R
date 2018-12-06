@@ -131,7 +131,7 @@ ui<-renderUI(
             fileInput('mchuanshaodxyibanfile1_fenzu', 'Import your data：',
                       accept=c('text/csv','text/plain','.xlsx','.xls')),
             checkboxInput('mchuanshaodxyibanheader_fenzu', 'Header？', TRUE),
-            checkboxInput('mchuanshaodxyibanfirstcol_fenzu', 'First column？', TRUE),
+            checkboxInput('mchuanshaodxyibanfirstcol_fenzu', 'First column？', FALSE),
             conditionalPanel(condition = "input.mchuanshaodxyibanfileType_Input_fenzu==1",
                              numericInput("mchuanshaodxyibanxlsxindex_fenzu","Sheet index:",value = 1)),
             conditionalPanel(condition = "input.mchuanshaodxyibanfileType_Input_fenzu==2",
