@@ -72,7 +72,20 @@ ui<-renderUI(
                      opacity:0.6;
                      z-index: 105;
                      }
-                     ")
+                     "),
+        tags$script('
+                            var dimension = [0, 0];
+                    $(document).on("shiny:connected", function(e) {
+                    dimension[0] = window.innerWidth;
+                    dimension[1] = window.innerHeight;
+                    Shiny.onInputChange("dimension", dimension);
+                    });
+                    $(window).resize(function(e) {
+                    dimension[0] = window.innerWidth;
+                    dimension[1] = window.innerHeight;
+                    Shiny.onInputChange("dimension", dimension);
+                    });
+                    ')
       )
     ),
 
@@ -81,27 +94,7 @@ ui<-renderUI(
     tabsetPanel(
       tabPanel(
         "Welcome",
-        fluidRow(
-          div(style="text-align:center",h1("~~Welcome~~")),
-          column(
-            6,
-            div(style="text-align:center",h3("Graphic Abstract")),
-            div(HTML(
-              "<div style='text-align:center;'>
-          <a href='https://github.com/wangshisheng/MSpectraAI' target='_black'><img src='MSpectraAI_logo.jpg' height='650px'>
-          </a>
-          </div>"
-            ))
-          ),
-          column(
-            6,
-            h3("I. This is an open source project, please visit our github to get the source code:"),
-            a(href="https://github.com/wangshisheng/MSpectraAI",h4("https://github.com/wangshisheng/MSpectraAI")),
-            h3("II. We recommend you to run this software locally."),
-            h3("III. The detailed manual can be found here:"),
-            a(href="https://github.com/wangshisheng/MSpectraAI/blob/master/SupportingNotes.pdf",h4("https://github.com/wangshisheng/MSpectraAI/blob/master/SupportingNotes.pdf"))
-          )
-        )
+        uiOutput("welcomeui")
       ),
       tabPanel(
         "Import Data",
@@ -131,7 +124,7 @@ ui<-renderUI(
             fileInput('mchuanshaodxyibanfile1_fenzu', 'Import your data：',
                       accept=c('text/csv','text/plain','.xlsx','.xls')),
             checkboxInput('mchuanshaodxyibanheader_fenzu', 'Header？', TRUE),
-            checkboxInput('mchuanshaodxyibanfirstcol_fenzu', 'First column？', FALSE),
+            checkboxInput('mchuanshaodxyibanfirstcol_fenzu', 'First column？', TRUE),
             conditionalPanel(condition = "input.mchuanshaodxyibanfileType_Input_fenzu==1",
                              numericInput("mchuanshaodxyibanxlsxindex_fenzu","Sheet index:",value = 1)),
             conditionalPanel(condition = "input.mchuanshaodxyibanfileType_Input_fenzu==2",
@@ -535,7 +528,45 @@ ui<-renderUI(
 server<-shinyServer(function(input, output, session){
   options(shiny.maxRequestSize=2048*1024^2)
   usertimenum<-as.numeric(Sys.time())
-  #
+  #ui
+  output$welcomeui<-renderUI({
+    screenwidth<-input$dimension[1]
+    #screenheight<-input$dimension[2]
+    #tryCatch({},error=function(e) NULL)
+    if(is.null(screenwidth)){
+      return(NULL)
+    }else{
+      if(screenwidth<=1024){
+        imgwidth<-350
+      }
+      else if(screenwidth>1024 & screenwidth<=1440){
+        imgwidth<-450
+      }
+      else{
+        imgwidth<-600
+      }
+    }
+
+    fluidRow(
+      div(style="text-align:center",h1("~~Welcome~~")),
+      column(
+        6,
+        div(style="text-align:center",h3("Graphic Abstract")),
+        div(style="text-align:center",
+            a(href='https://github.com/wangshisheng/MSpectraAI',
+              img(src='MSpectraAI_logo.jpg',height=imgwidth)))
+      ),
+      column(
+        6,
+        div(style="width:fit-content;width:-webkit-fit-content;width:-moz-fit-content;",
+            h3("I. This is an open source project, please visit our github to get the source code:"),
+            a(href="https://github.com/wangshisheng/MSpectraAI",h4("https://github.com/wangshisheng/MSpectraAI")),
+            h3("II. We recommend you to run this software locally."),
+            h3("III. The detailed manual can be found here:"),
+            a(href="https://github.com/wangshisheng/MSpectraAI/blob/master/SupportingNotes.pdf",h4("https://github.com/wangshisheng/MSpectraAI/blob/master/SupportingNotes.pdf")))
+      )
+    )
+  })
   #show data
   peaksdataout<-reactive({
     files <- input$file1
