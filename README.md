@@ -11,6 +11,7 @@
 ## Preparation
 - **Install R**. You can download R from here:[https://www.r-project.org/](https://www.r-project.org/).
 - **Install RStudio** (Recommendatory but not necessary). You can download RStudio from here:[https://www.rstudio.com/](https://www.rstudio.com/).
+- **Install Anaconda** (For Windows users). You can download Anaconda from here: [https://www.anaconda.com/download/](https://www.anaconda.com/download/).
 
 ## Install Packages
 We recommend the R version >= 3.5.0.
