@@ -9,8 +9,8 @@
 * **Be familiar with the basic usage of R language**. This web tool is developed with R, therefore, if you know some basic knowledge about R, it will help you understand this tool better. However, you need not worry if you know nothing about R, and you can learn to use our tool expertly as well after reading our manual.
 
 ## Preparation
-- **Install R**. You can download R from here:[https://www.r-project.org/](https://www.r-project.org/).
-- **Install RStudio** (Recommendatory but not necessary). You can download RStudio from here:[https://www.rstudio.com/](https://www.rstudio.com/).
+- **Install R**. You can download R from here: [https://www.r-project.org/](https://www.r-project.org/).
+- **Install RStudio** (Recommendatory but not necessary). You can download RStudio from here: [https://www.rstudio.com/](https://www.rstudio.com/).
 - **Install Anaconda** (For Windows users). You can download Anaconda from here: [https://www.anaconda.com/download/](https://www.anaconda.com/download/).
 
 ## Install Packages
