@@ -26,8 +26,8 @@ CheckInstallFunc <- function(x){
     #  require returns TRUE invisibly if it was able to load package
     if(!require(i, character.only = TRUE)){
       #  If package was not able to be loaded then re-install
-      BiocManager::install(i, dependencies = TRUE)
-      if(!require(i, character.only = TRUE)) install.packages(i, dependencies = TRUE )
+      install.packages(i, dependencies = TRUE)
+      if(!require(i, character.only = TRUE)) BiocManager::install(i, dependencies = TRUE)
       if(i=="ggrastr"){
         devtools::install_github('VPetukhov/ggrastr')
       }
