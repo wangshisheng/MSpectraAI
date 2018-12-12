@@ -17,7 +17,7 @@
 We recommend the R version >= 3.5.0.
 ```r
 #Packages
-needpackages<-c("devtools","shiny","shinyjs","shinyBS","ggplot2","ggjoy","openxlsx","gdata","DT","gtools","ggsci","mzR",
+needpackages<-c("BiocManager","devtools","shiny","shinyjs","shinyBS","ggplot2","ggjoy","openxlsx","gdata","DT","gtools","ggsci","mzR",
                 "plyr","tidyr","abind","data.table","parallel","ggrastr","ggthemes","viridis","glue","ComplexHeatmap",
                 "reshape","impute","circlize","ROCR","keras")
 #Check and install function
