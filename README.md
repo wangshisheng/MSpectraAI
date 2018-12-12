@@ -14,7 +14,11 @@
 - **Install Anaconda** (For Windows users). You can download Anaconda from here: [https://www.anaconda.com/download/](https://www.anaconda.com/download/).
 
 ## Install Packages
-We recommend the R version >= 3.5.0.
+We recommend the R version >= 3.5.0. Particularly, if you use unix-like systems, you may need install some dependent packages in advance, for example, on CentOS 7:
+```r
+sudo yum -y install libxml2-devel igraph-devel libxslt-devel netcdf-devel libnetcdf-dev libcurl-devel
+```
+
 ```r
 #Packages
 needpackages<-c("BiocManager","devtools","shiny","shinyjs","shinyBS","ggplot2","ggjoy","openxlsx","gdata","DT","gtools","ggsci","mzR",
