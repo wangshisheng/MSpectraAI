@@ -17,6 +17,8 @@
 We recommend the R version >= 3.5.0. Particularly, if you use unix-like systems, you may need install some dependent packages in advance, for example, on CentOS 7:
 ```r
 sudo yum -y install libxml2-devel igraph-devel libxslt-devel netcdf-devel libcurl-devel openssl-devel cairo-devel
+
+pip install virtualenv
 ```
 
 ```r
