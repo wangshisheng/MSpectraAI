@@ -280,7 +280,7 @@ ui<-renderUI(
                       ),
                       column(
                         width = 4,
-                        textInput("mzindex","M/Z Index:",value = "200:400")
+                        textInput("mzindex","M/Z Window Index:",value = "200:400")
                       )
                     ),
                     div(id="msswathds_div",checkboxInput("msswathds","Change figure size？",FALSE)),
