@@ -339,7 +339,7 @@ ui<-renderUI(
                       ),
                       column(
                         width = 4,
-                        textInput("msmsmzindex","M/Z Index:",value = "200:400")
+                        textInput("msmsmzindex","M/Z Window Index:",value = "200:400")
                       )
                     ),
                     div(id="msmsswathds_div",checkboxInput("msmsswathds","Change figure size？",FALSE)),
@@ -374,6 +374,7 @@ ui<-renderUI(
                   div(
                     id="mcsbtn_MSalldataid",
                     downloadButton("MSalldatadl","Download"),
+                    h4("Data Preview:"),
                     dataTableOutput("MSalldata")
                   )
                 )
@@ -386,6 +387,7 @@ ui<-renderUI(
                   div(
                     id="mcsbtn_MSMSalldataid",
                     downloadButton("MSMSalldatadl","Download"),
+                    h4("Data Preview:"),
                     dataTableOutput("MSMSalldata")
                   )
                 )
