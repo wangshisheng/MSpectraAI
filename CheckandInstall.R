@@ -18,3 +18,4 @@ needpackages<-c("devtools","shiny","shinyjs","shinyBS","ggplot2","ggjoy","openxl
                 "impute","circlize","ROCR","keras")
 #
 CheckInstallFunc(needpackages)
+#Please attention, you can also install these packages one by one.
