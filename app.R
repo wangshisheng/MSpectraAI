@@ -12,7 +12,7 @@ ui<-renderUI(
     title="MSpectraAI",
     shinyjs::useShinyjs(),
     fluidRow(
-      column(5,div(
+      column(5, div(
         HTML(
           "<div style='text-align:right;margin-right:0px'>
           <a href='#' target=''><img src='MSpectraAI_logotizuo.jpg' width='100px'>
