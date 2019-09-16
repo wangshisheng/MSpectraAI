@@ -1,4 +1,4 @@
-# MSpectraAI<img src="www/MSpectraAI_logotizuo.jpg" align="right" height="200" width="200"/>
+# MSpectraAI<img src="www/MSpectraAI_logotizuo.jpg" align="right" height="190" width="190"/>
 #### A powerful software for deciphering proteome profiling of multi-tumour mass spectrometry data using deep neural networks
 
 ## Brief Description
