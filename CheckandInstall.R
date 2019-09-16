@@ -13,7 +13,7 @@ CheckInstallFunc <- function(x){
   }
 }
 #Packages
-needpackages<-c("devtools","shiny","shinyjs","shinyBS","ggplot2","ggjoy","openxlsx","gdata","DT","gtools","ggsci","mzR",
+needpackages<-c("pacman","devtools","shiny","shinyjs","shinyBS","ggplot2","ggjoy","openxlsx","gdata","DT","gtools","ggsci","mzR",
                 "plyr","tidyr","abind","data.table","parallel","ggrastr","ggthemes","viridis","glue","ComplexHeatmap",
                 "impute","circlize","ROCR","keras")
 #
