@@ -542,7 +542,10 @@ server<-shinyServer(function(input, output, session){
             a(href="https://github.com/wangshisheng/MSpectraAI",h4("https://github.com/wangshisheng/MSpectraAI")),
             h3("II. We recommend you to run this software locally."),
             h3("III. The detailed manual can be found here:"),
-            a(href="https://github.com/wangshisheng/MSpectraAI/blob/master/SupportingNotes.pdf",h4("https://github.com/wangshisheng/MSpectraAI/blob/master/SupportingNotes.pdf")))
+            a(href="https://github.com/wangshisheng/MSpectraAI/blob/master/SupportingNotes.pdf",h4("https://github.com/wangshisheng/MSpectraAI/blob/master/SupportingNotes.pdf")),
+            h3("IV. Cite this article:"),
+            h3("Shisheng Wang, Hongwen Zhu, Hu Zhou, Jingqiu Cheng and Hao Yang. MSpectraAI: a powerful platform for deciphering proteome profiling of multi-tumor mass spectrometry data by using deep neural networks. BMC Bioinformatics 21, 439 (2020).",a(href="https://doi.org/10.1186/s12859-020-03783-0","Link to article.",target="_black"))
+           )
       )
     )
   })
