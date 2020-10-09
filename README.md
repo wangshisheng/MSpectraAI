@@ -4,6 +4,9 @@
 ## Brief Description
 **<font size='5'> MSpectraAI </font>** is a free, user-friendly and comprehensive software for mining and classifying raw LC-MS<sup>2</sup>-based proteomics or metabolomics data of different samples using deep learning models. Users can also built your own deep neural network model in this software. It is developed with [R](https://www.r-project.org/) and an example is shown here: [https://www.omicsolution.org/wukong/MSpectraAI/](https://www.omicsolution.org/wukong/MSpectraAI/).
 
+## Cite this article
+Wang, S., Zhu, H., Zhou, H. et al. MSpectraAI: a powerful platform for deciphering proteome profiling of multi-tumor mass spectrometry data by using deep neural networks. BMC Bioinformatics 21, 439 (2020). [https://doi.org/10.1186/s12859-020-03783-0](https://doi.org/10.1186/s12859-020-03783-0).
+
 ## Friendly Tips
 * **Run this tool locally**. As we know, the raw data from mass spectrometer are usually very large. You can analyze your data on our web server, but the analysis speed will be slower. Therefore, we recomand you run this tool locally on a high configuration computer. The entire analysis time will be much shorter.
 * **Be familiar with the basic usage of R language**. This web tool is developed with R, therefore, if you know some basic knowledge about R, it will help you understand this tool better. However, you need not worry if you know nothing about R, and you can learn to use our tool expertly as well after reading our manual.
