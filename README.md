@@ -16,7 +16,7 @@ Wang, S., Zhu, H., Zhou, H. et al. MSpectraAI: a powerful platform for decipheri
 - **Install RStudio** (Recommendatory but not necessary). You can download RStudio from here: [https://www.rstudio.com/](https://www.rstudio.com/).
 - **Install Anaconda** (For Windows users). You can download Anaconda from here: [https://www.anaconda.com/download/](https://www.anaconda.com/download/).
 
-## Install Packages
+## Install Packages 
 We recommend the R version >= 3.5.0. Particularly, if you use unix-like systems, you may need install some dependent packages in advance, for example, on CentOS 7:
 ```r
 sudo yum -y install libxml2-devel igraph-devel libxslt-devel netcdf-devel libcurl-devel openssl-devel cairo-devel
