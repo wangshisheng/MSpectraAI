@@ -18,4 +18,4 @@ needpackages<-c("pacman","devtools","shiny","shinyjs","shinyBS","ggplot2","ggjoy
                 "impute","circlize","ROCR","keras")
 #
 CheckInstallFunc(needpackages)
-#Please attention, you can also install these packages one by one.
+#Please attention, if you can not install some packages right, you can try to install them one by one or please contact me.
