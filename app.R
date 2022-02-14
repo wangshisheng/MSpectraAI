@@ -1,4 +1,4 @@
-#Please install these packages below.
+#Please check and install these packages below.
 pacman::p_load(shiny,shinyjs,shinyBS,DT,ggplot2,ggjoy,openxlsx,gdata,gtools,ggsci,mzR,impute,plyr,tidyr,abind,data.table,parallel,ggrastr,ggthemes,viridis,ComplexHeatmap,glue,circlize,ROCR,keras)
 colpalettes<-unique(c(pal_npg("nrc")(10),pal_aaas("default")(10),pal_nejm("default")(8),pal_lancet("lanonc")(9),
                       pal_jama("default")(7),pal_jco("default")(10),pal_ucscgb("default")(26),pal_d3("category10")(10),
