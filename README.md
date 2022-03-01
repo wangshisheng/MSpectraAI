@@ -62,7 +62,7 @@ The usage about this tool can be found here:
 [https://github.com/wangshisheng/MSpectraAI/blob/master/SupportingNotes.pdf](https://github.com/wangshisheng/MSpectraAI/blob/master/SupportingNotes.pdf).
 
 ## Graphic Abstract
-<img src="figs/TOC_MSpectraAI1.jpg" align="center" height="400" width="800"/>
+<img src="figs/TOC_MSpectraAI1.jpg" align="center" height="600" width="513"/>
 
 ## Information About the Current R Session
 ```r
