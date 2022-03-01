@@ -55,7 +55,7 @@ library(shiny)
 runApp(".../MSpectraAI")
 ```
 Then you can start your own analysis:
-<img src="figs/homepage1.jpg" align="center" height="400" width="800"/>
+<img src="figs/homepage1.jpg" align="center" height="684" width="800"/>
 
 ## Detailed Introduction
 The usage about this tool can be found here:
@@ -102,7 +102,7 @@ loaded via a namespace (and not attached):
 [55] mime_0.5
 ```
 
-## Cite this article
+## Please cite this article
 Wang, S., Zhu, H., Zhou, H. et al. MSpectraAI: a powerful platform for deciphering proteome profiling of multi-tumor mass spectrometry data by using deep neural networks. BMC Bioinformatics 21, 439 (2020). [https://doi.org/10.1186/s12859-020-03783-0](https://doi.org/10.1186/s12859-020-03783-0).
 
 ## Contact
