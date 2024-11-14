@@ -1253,28 +1253,42 @@ server<-shinyServer(function(input, output, session){
     resloop_dnn<-NULL
     numcum1<-c(0,cumsum(cmdata$ngroupnum))
     withProgress(message = 'Training data', style = "notification", detail = "File 1", value = 0,{
-      for(i in 1:length(cmdata$ngroupnum)){
-        ABindex_testxx<-c((numcum1[i]+1):numcum1[i+1])
-        test_imagesxx <- allmsarray_cell[ABindex_testxx,]
-        train_imagesxx <- allmsarray_cell[-ABindex_testxx,]
-        train_labelsxx <- to_categorical(allmsarray_cell_label[-ABindex_testxx])
-        test_labelsxx <- to_categorical(allmsarray_cell_label[ABindex_testxx])
+        for(i in 1:length(cmdata$ngroupnum)){
+          ABindex_testxx <- c((numcum1[i]+1):numcum1[i+1])
+          test_imagesxx <- allmsarray_cell[ABindex_testxx,]
+          train_imagesxx <- allmsarray_cell[-ABindex_testxx,]
+          train_labelsxx <- to_categorical(allmsarray_cell_label[-ABindex_testxx])
+          test_labelsxx <- to_categorical(allmsarray_cell_label[ABindex_testxx])
 
-        typemodel<-input$deepmodelinput
-        typemodelsumm<-eval(parse(text = glue(typemodel)))
+          typemodel <- input$deepmodelinput
+          typemodelsumm <- eval(parse(text = glue(typemodel)))
 
-        typemodelsumm %>% fit(train_imagesxx, train_labelsxx, epochs = input$dnnepochs, batch_size = input$dnnbatch,verbose = 0)
-        test_labelsprexx1<-typemodelsumm %>% predict_classes(test_imagesxx)
-        tab1x<-table(test_labelsprexx1)
-        tab1<-matrix(tab1x, ncol=length(tab1x), byrow=TRUE, dimnames=NULL)
-        colnames(tab1)<-names(tab1x)
-        if(i==1){
-          resloop_dnn<-tab1
-        }else{
-          resloop_dnn<-smartbind(resloop_dnn,tab1)
+          typemodelsumm %>% fit(
+            train_imagesxx,
+            train_labelsxx,
+            epochs = input$dnnepochs,
+            batch_size = input$dnnbatch,
+            verbose = 0
+          )
+
+          predictions <- typemodelsumm %>% predict(test_imagesxx)
+          test_labelsprexx1 <- apply(predictions, 1, which.max) - 1
+
+          tab1x <- table(test_labelsprexx1)
+          tab1 <- matrix(
+            tab1x,
+            ncol = length(tab1x),
+            byrow = TRUE,
+            dimnames = NULL
+          )
+          colnames(tab1) <- names(tab1x)
+          if(i == 1){
+            resloop_dnn <- tab1
+          } else {
+            resloop_dnn <- smartbind(resloop_dnn, tab1)
+          }
+          incProgress(1 / length(cmdata$ngroupnum), detail = paste("File", i))
         }
-        incProgress(1/length(cmdata$ngroupnum), detail = paste("File", i))
-      }
     })
     resloop_dnnx<-resloop_dnn#[-1,]
     resloop_dnnx[is.na(resloop_dnnx)]<-0
@@ -1282,41 +1296,55 @@ server<-shinyServer(function(input, output, session){
     rownames(resloop_dnnx)<-samplesdf[[1]]
     resloop_dnnx
   })
-  confmatoutmsms<-reactive({
-    cmdata<-MSMSalldataout()
-    allmsarray_cell<-cmdata$allmsmsarray_cell/apply(cmdata$allmsmsarray_cell, 1, max)
-    allmsarray_cell_label<-cmdata$allmsmsarray_cell_label
+  confmatoutmsms <- reactive({
+    cmdata <- MSMSalldataout()
+    allmsarray_cell <- cmdata$allmsmsarray_cell / apply(cmdata$allmsmsarray_cell, 1, max)
+    allmsarray_cell_label <- cmdata$allmsmsarray_cell_label
 
-    resloop_dnn<-NULL
-    numcum1<-c(0,cumsum(cmdata$ngroupnum))
-    withProgress(message = 'Training data', style = "notification", detail = "File 1", value = 0,{
-      for(i in 1:length(cmdata$ngroupnum)){
-        ABindex_testxx<-c((numcum1[i]+1):numcum1[i+1])
-        test_imagesxx <- allmsarray_cell[ABindex_testxx,]
-        train_imagesxx <- allmsarray_cell[-ABindex_testxx,]
+    resloop_dnn <- NULL
+    numcum1 <- c(0, cumsum(cmdata$ngroupnum))
+    withProgress(message = 'Training data', style = "notification", detail = "File 1", value = 0, {
+      for (i in 1:length(cmdata$ngroupnum)) {
+        ABindex_testxx <- c((numcum1[i] + 1):numcum1[i + 1])
+        test_imagesxx <- allmsarray_cell[ABindex_testxx, ]
+        train_imagesxx <- allmsarray_cell[-ABindex_testxx, ]
         train_labelsxx <- to_categorical(allmsarray_cell_label[-ABindex_testxx])
         test_labelsxx <- to_categorical(allmsarray_cell_label[ABindex_testxx])
 
-        typemodel<-input$deepmodelinput
-        typemodelsumm<-eval(parse(text = glue(typemodel)))
+        typemodel <- input$deepmodelinput
+        typemodelsumm <- eval(parse(text = glue(typemodel)))
 
-        typemodelsumm %>% fit(train_imagesxx, train_labelsxx, epochs = input$dnnepochs, batch_size = input$dnnbatch,verbose = 0)
-        test_labelsprexx1<-typemodelsumm %>% predict_classes(test_imagesxx)
-        tab1x<-table(test_labelsprexx1)
-        tab1<-matrix(tab1x, ncol=length(tab1x), byrow=TRUE, dimnames=NULL)
-        colnames(tab1)<-names(tab1x)
-        if(i==1){
-          resloop_dnn<-tab1
-        }else{
-          resloop_dnn<-smartbind(resloop_dnn,tab1)
+        typemodelsumm %>% fit(
+          train_imagesxx,
+          train_labelsxx,
+          epochs = input$dnnepochs,
+          batch_size = input$dnnbatch,
+          verbose = 0
+        )
+
+        predictions <- typemodelsumm %>% predict(test_imagesxx)
+        test_labelsprexx1 <- apply(predictions, 1, which.max) - 1
+
+        tab1x <- table(test_labelsprexx1)
+        tab1 <- matrix(
+          tab1x,
+          ncol = length(tab1x),
+          byrow = TRUE,
+          dimnames = NULL
+        )
+        colnames(tab1) <- names(tab1x)
+        if (i == 1) {
+          resloop_dnn <- tab1
+        } else {
+          resloop_dnn <- smartbind(resloop_dnn, tab1)
         }
-        incProgress(1/length(cmdata$ngroupnum), detail = paste("File", i))
+        incProgress(1 / length(cmdata$ngroupnum), detail = paste("File", i))
       }
     })
-    resloop_dnnx<-resloop_dnn#[-1,]
-    resloop_dnnx[is.na(resloop_dnnx)]<-0
-    samplesdf<-samplesdataout()
-    rownames(resloop_dnnx)<-samplesdf[[1]]
+    resloop_dnnx <- resloop_dnn
+    resloop_dnnx[is.na(resloop_dnnx)] <- 0
+    samplesdf <- samplesdataout()
+    rownames(resloop_dnnx) <- samplesdf[[1]]
     resloop_dnnx
   })
   observeEvent(
@@ -1456,110 +1484,116 @@ server<-shinyServer(function(input, output, session){
   #    return(NULL)
   #  }
   #})
-  roccurvepout<-reactive({
-    samplesdf<-samplesdataout()
-    classnum<-length(unique(samplesdf[[2]]))
-    #roccinput<-input$rocclass
-    if(classnum>2){
-      rocclassstr<-as.numeric(strsplit(input$twoclassl,";")[[1]])
-      if(input$modelresultype==1){
-        cmdata<-MSalldataout()
-        rocindex1<-c(cmdata$allmsarray_cell_label==rocclassstr[1] | cmdata$allmsarray_cell_label==rocclassstr[2])
-        allmsarray_cell<-cmdata$allmsarray_cell[rocindex1,]/apply(cmdata$allmsarray_cell[rocindex1,], 1, max)
-        allmsarray_cell_label1<-cmdata$allmsarray_cell_label[rocindex1]
-      }else{
-        cmdata<-MSMSalldataout()
-        rocindex1<-c(cmdata$allmsmsarray_cell_label==rocclassstr[1] | cmdata$allmsmsarray_cell_label==rocclassstr[2])
-        allmsarray_cell<-cmdata$allmsmsarray_cell[rocindex1,]/apply(cmdata$allmsmsarray_cell[rocindex1,], 1, max)
-        allmsarray_cell_label1<-cmdata$allmsmsarray_cell_label[rocindex1]
+  roccurvepout <- reactive({
+    samplesdf <- samplesdataout()
+    classnum <- length(unique(samplesdf[[2]]))
+    
+    if (classnum > 2) {
+      rocclassstr <- as.numeric(strsplit(input$twoclassl, ";")[[1]])
+      if (input$modelresultype == 1) {
+        cmdata <- MSalldataout()
+        rocindex1 <- cmdata$allmsarray_cell_label %in% rocclassstr
+        allmsarray_cell <- cmdata$allmsarray_cell[rocindex1, ] / apply(cmdata$allmsarray_cell[rocindex1, ], 1, max)
+        allmsarray_cell_label1 <- cmdata$allmsarray_cell_label[rocindex1]
+      } else {
+        cmdata <- MSMSalldataout()
+        rocindex1 <- cmdata$allmsmsarray_cell_label %in% rocclassstr
+        allmsarray_cell <- cmdata$allmsmsarray_cell[rocindex1, ] / apply(cmdata$allmsmsarray_cell[rocindex1, ], 1, max)
+        allmsarray_cell_label1 <- cmdata$allmsmsarray_cell_label[rocindex1]
       }
-
-      rocindex2<-c(samplesdf[[2]]==rocclassstr[1] | samplesdf[[2]]==rocclassstr[2])
-      allmsarray_cell_label<-rep(0:1,as.numeric(table(allmsarray_cell_label1)))
-      cumnum<-cumsum(cmdata$ngroupnum[rocindex2])
-
-      resloop_dnn<-NULL
-      numcum1<-c(0,cumnum)
-      typemodel1<-input$deepmodelinput
-      typemodel<-gsub(" ","",typemodel1)
-      aagrep<-gregexpr("units=\\d",typemodel)
-      aagrepul<-unlist(aagrep)
-      aagrepar<-attributes(aagrep[[1]])
-      xx1<-aagrepul[length(aagrepul)]
-      xx2<-aagrepar$match.length[length(aagrepar$match.length)]
-      substr(typemodel,xx1,xx1+xx2-1)<-"units=2"
-      #typemodel<<-typemodel
-      withProgress(message = 'Training data', style = "notification", detail = "File 1", value = 0,{
-        for(i in 1:length(cumnum)){
-          ABindex_testxx<-c((numcum1[i]+1):numcum1[i+1])
-          test_imagesxx <- allmsarray_cell[ABindex_testxx,]
-          train_imagesxx <- allmsarray_cell[-ABindex_testxx,]
-          train_labelsxx <- to_categorical(allmsarray_cell_label[-ABindex_testxx])
-          test_labelsxx <- to_categorical(allmsarray_cell_label[ABindex_testxx])
-          typemodelsumm<-eval(parse(text = glue(typemodel)))
-          typemodelsumm %>% fit(train_imagesxx, train_labelsxx, epochs = input$dnnepochs, batch_size = input$dnnbatch,verbose = 0)
-          test_labelsprexx1<-typemodelsumm %>% predict_classes(test_imagesxx)
-          tab1x<-table(test_labelsprexx1)
-          tab1<-matrix(tab1x, ncol=length(tab1x), byrow=TRUE, dimnames=NULL)
-          colnames(tab1)<-names(tab1x)
-          if(i==1){
-            resloop_dnn<-tab1
-          }else{
-            resloop_dnn<-smartbind(resloop_dnn,tab1)
-          }
-          incProgress(1/length(cumnum), detail = paste("File", i))
+      
+      rocindex2 <- samplesdf[[2]] %in% rocclassstr
+      allmsarray_cell_label <- ifelse(allmsarray_cell_label1 == rocclassstr[1], 0, 1)
+      cumnum <- cumsum(cmdata$ngroupnum[rocindex2])
+      
+      true_labels <- c()
+      pred_probs <- c()
+      
+      numcum1 <- c(0, cumnum)
+      typemodel1 <- input$deepmodelinput
+      typemodel <- gsub(" ", "", typemodel1)
+      aagrep <- gregexpr("units=\\d+", typemodel)
+      aagrepul <- unlist(aagrep)
+      aagrepar <- attributes(aagrep[[1]])
+      xx1 <- aagrepul[length(aagrepul)]
+      xx2 <- aagrepar$match.length[length(aagrepar$match.length)]
+      substr(typemodel, xx1, xx1 + xx2 - 1) <- "units=2"
+      
+      withProgress(message = 'Training data', style = "notification", detail = "File 1", value = 0, {
+        for (i in 1:length(cumnum)) {
+          ABindex_testxx <- (numcum1[i] + 1):numcum1[i + 1]
+          test_imagesxx <- allmsarray_cell[ABindex_testxx, ]
+          train_imagesxx <- allmsarray_cell[-ABindex_testxx, ]
+          train_labelsxx <- to_categorical(allmsarray_cell_label[-ABindex_testxx], num_classes = 2)
+          test_labelsxx <- to_categorical(allmsarray_cell_label[ABindex_testxx], num_classes = 2)
+          typemodelsumm <- eval(parse(text = glue(typemodel)))
+          typemodelsumm %>% fit(
+            train_imagesxx,
+            train_labelsxx,
+            epochs = input$dnnepochs,
+            batch_size = input$dnnbatch,
+            verbose = 0
+          )
+          predictions <- typemodelsumm %>% predict(test_imagesxx)
+          pred_prob <- predictions[, 2]
+          true_label <- allmsarray_cell_label[ABindex_testxx]
+          pred_probs <- c(pred_probs, pred_prob)
+          true_labels <- c(true_labels, true_label)
+          incProgress(1 / length(cumnum), detail = paste("File", i))
         }
       })
-      resloop_dnnx<-resloop_dnn#[-1,]
-      resloop_dnnx[is.na(resloop_dnnx)]<-0
-      rownames(resloop_dnnx)<-samplesdf[[1]][rocindex2]
-      rocdf_oralcmsms<-data.frame(labels=rep(0:1,as.numeric(table(samplesdf[[2]][rocindex2]))),prevalue=resloop_dnnx[,2]/apply(resloop_dnnx,1,sum))
-      wholedf_oralcmsms<-cbind(rocdf_oralcmsms,resloop_dnnx)
-    }else{
-      if(input$modelresultype==1){
-        confmatoutdf<-confmatoutms()
-      }else{
-        confmatoutdf<-confmatoutmsms()
+
+      rocdf_oralcmsms <- data.frame(labels = true_labels, prevalue = pred_probs)
+      wholedf_oralcmsms <- rocdf_oralcmsms
+      
+    } else {
+      if (input$modelresultype == 1) {
+        confmatoutdf <- confmatoutms()
+      } else {
+        confmatoutdf <- confmatoutmsms()
       }
-      resloop_dnnx<-confmatoutdf
-      rocdf_oralcmsms<-data.frame(labels=rep(0:1,as.numeric(table(samplesdf[[2]]))),prevalue=resloop_dnnx[,2]/apply(resloop_dnnx,1,sum))
-      wholedf_oralcmsms<-cbind(rocdf_oralcmsms,resloop_dnnx)
+
+      resloop_dnnx <- confmatoutdf
+      true_labels <- as.numeric(samplesdf[[2]])
+      pred_probs <- resloop_dnnx[, 2] / rowSums(resloop_dnnx)
+      rocdf_oralcmsms <- data.frame(labels = true_labels, prevalue = pred_probs)
+      wholedf_oralcmsms <- rocdf_oralcmsms
     }
-    list(resloop_dnnx=resloop_dnnx,wholedf_oralcmsms=wholedf_oralcmsms,rocdf_oralcmsms=rocdf_oralcmsms)
+    list(resloop_dnnx = NULL, wholedf_oralcmsms = wholedf_oralcmsms, rocdf_oralcmsms = rocdf_oralcmsms)
   })
-  roccurve_heightx<-reactive({
-    roccurve_heightx<-input$roccurve_height
-    roccurve_heightx
+  roccurve_heightx <- reactive({
+  roccurve_heightx <- input$roccurve_height
+  roccurve_heightx
   })
   observeEvent(
-    input$mcsbtn_roccurve,{
+    input$mcsbtn_roccurve, {
       shinyjs::show(id = "mcsbtn_roccurveid", anim = FALSE)
-      output$roccurveplot<-renderPlot({
-        resloop_dnnx<-roccurvepout()$resloop_dnnx
-        rocdf_oralcmsms<-roccurvepout()$rocdf_oralcmsms
+      output$roccurveplot <- renderPlot({
+        rocdf_oralcmsms <- roccurvepout()$rocdf_oralcmsms
         pred_oralcmsms <- prediction(rocdf_oralcmsms$prevalue, rocdf_oralcmsms$labels)
-        perf_oralcmsms <- performance(pred_oralcmsms,"tpr","fpr")
-        plot(perf_oralcmsms,col=colpalettes[6],type="o",pch=16,lwd=3,cex=2)
-        abline(a=0, b=1, col="black")
-        auc<- performance( pred_oralcmsms,  c("auc"))
-        aucvalue_oralcmsms<-unlist(slot(auc , "y.values"))
-        text(0.2,0.7,labels = paste0("AUC: ",round(aucvalue_oralcmsms,3)))
-      },height = roccurve_heightx)
-      roccurveplotout<-reactive({
-        resloop_dnnx<-roccurvepout()$resloop_dnnx
-        rocdf_oralcmsms<-roccurvepout()$rocdf_oralcmsms
+        perf_oralcmsms <- performance(pred_oralcmsms, "tpr", "fpr")
+        plot(perf_oralcmsms, col = colpalettes[6], type = "o", pch = 16, lwd = 3, cex = 2)
+        abline(a = 0, b = 1, col = "black")
+        auc <- performance(pred_oralcmsms, "auc")
+        aucvalue_oralcmsms <- unlist(slot(auc, "y.values"))
+        text(0.2, 0.7, labels = paste0("AUC: ", round(aucvalue_oralcmsms, 3)))
+      }, height = roccurve_heightx)
+      
+      roccurveplotout <- reactive({
+        rocdf_oralcmsms <- roccurvepout()$rocdf_oralcmsms
         pred_oralcmsms <- prediction(rocdf_oralcmsms$prevalue, rocdf_oralcmsms$labels)
-        perf_oralcmsms <- performance(pred_oralcmsms,"tpr","fpr")
-        plot(perf_oralcmsms,col=colpalettes[6],type="o",pch=16,lwd=3,cex=2)
-        abline(a=0, b=1, col="black")
-        auc<- performance( pred_oralcmsms,  c("auc"))
-        aucvalue_oralcmsms<-unlist(slot(auc , "y.values"))
-        text(0.2,0.7,labels = paste0("AUC: ",round(aucvalue_oralcmsms,3)))
+        perf_oralcmsms <- performance(pred_oralcmsms, "tpr", "fpr")
+        plot(perf_oralcmsms, col = colpalettes[6], type = "o", pch = 16, lwd = 3, cex = 2)
+        abline(a = 0, b = 1, col = "black")
+        auc <- performance(pred_oralcmsms, "auc")
+        aucvalue_oralcmsms <- unlist(slot(auc, "y.values"))
+        text(0.2, 0.7, labels = paste0("AUC: ", round(aucvalue_oralcmsms, 3)))
       })
-      output$roccurvepicdl<-downloadHandler(
-        filename = function(){paste("ROC_figure",usertimenum,".pdf",sep="")},
-        content = function(file){
-          pdf(file,width =roccurve_heightx()/100,height = roccurve_heightx()/100)
+      
+      output$roccurvepicdl <- downloadHandler(
+        filename = function() { paste("ROC_figure", usertimenum, ".pdf", sep = "") },
+        content = function(file) {
+          pdf(file, width = roccurve_heightx() / 100, height = roccurve_heightx() / 100)
           print(roccurveplotout())
           dev.off()
         }
